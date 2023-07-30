@@ -6,12 +6,20 @@ import { addTodo, updateSearch } from "../store/todoSlice";
 export default function Controls() {
   const dispatch = useAppDispatch();
   const [todoLabel, setTodoLabel] = useState("");
+  const [disabledAddButton, setDisabledButton] = useState(true);
 
   const handleChangeLabel = (e: ChangeEvent<HTMLInputElement>) => {
-    setTodoLabel(e.currentTarget.value);
+    const {
+      currentTarget: { value },
+    } = e;
+    setTodoLabel(value);
+    setDisabledButton(value.length < 1);
   };
 
   const handleAddTodo = async () => {
+    if (disabledAddButton) {
+      return;
+    }
     try {
       const resp = await fetch("/api/todos", {
         method: "POST",
@@ -29,6 +37,7 @@ export default function Controls() {
       }
       dispatch(addTodo(createdTodoResponse.todo));
       setTodoLabel("");
+      setDisabledButton(true);
     } catch (err) {
       console.error(err);
     }
@@ -67,8 +76,9 @@ export default function Controls() {
           className="border rounded-lg px-4 py-2"
         />
         <button
-          className="border rounded-md px-4 py-2 bg-custom-blue"
           onClick={handleAddTodo}
+          disabled={disabledAddButton}
+          className="border rounded-md px-4 py-2 bg-custom-blue disabled:opacity-25 disabled:cursor-not-allowed disabled:pointer-events-none"
         >
           Add
         </button>

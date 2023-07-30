@@ -23,7 +23,7 @@ const handlers = [
     );
   }),
   rest.get("/api/todos", (req: any, res: any, ctx: any) => {
-    console.log(req);
+    console.log("get todos");
     const name = req.url.searchParams.get("name") || "";
     const onlyDone = (req.url.searchParams.get("done") || "") === "true";
     return res(

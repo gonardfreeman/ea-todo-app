@@ -8,10 +8,14 @@ export const sortTodos = ({
   includeDate: boolean;
 }) => {
   return todo.sort((a, b) => {
-    if (includeDate && a.updatedAt > b.updatedAt) {
+    let aUpdatedAt =
+      a.updatedAt instanceof Date ? a.updatedAt : new Date(a.updatedAt);
+    let bUpdatedAt =
+      b.updatedAt instanceof Date ? b.updatedAt : new Date(b.updatedAt);
+    if (includeDate && aUpdatedAt > bUpdatedAt) {
       return -1;
     }
-    if (includeDate && a.updatedAt < b.updatedAt) {
+    if (includeDate && aUpdatedAt < bUpdatedAt) {
       return 1;
     }
 

@@ -19,11 +19,7 @@ export default function TodoList({ isDone }: { isDone: boolean }) {
       try {
         const resp = await fetch(`/api/todos?done=${isDone}&name=${search}`);
         const todos: GetTodosResp = await resp.json();
-        dispatch(
-          action(
-            todos.todos.map((t) => ({ ...t, updatedAt: new Date(t.updatedAt) }))
-          )
-        );
+        dispatch(action(todos.todos));
       } catch (err) {
         console.error(err);
       }

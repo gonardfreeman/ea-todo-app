@@ -36,4 +36,7 @@ describe("TodoList Component", () => {
     let todoLabel = screen.getByText("Done");
     expect(todoLabel).toBeInTheDocument();
   });
+
+  // Due to lack of time and need of more complex mock backend (that will update and store values, etc)
+  // I leave it as is
 });
