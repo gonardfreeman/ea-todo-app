@@ -10,7 +10,7 @@ const selectFields = {
   updatedAt: true,
 };
 
-export async function getTodos(name: string) {
+export async function getTodos(name: string, done: boolean) {
   try {
     return await prisma.todo.findMany({
       select: selectFields,
@@ -18,38 +18,22 @@ export async function getTodos(name: string) {
         label: {
           contains: name,
         },
+        done,
       },
-      orderBy: [
-        {
-          label: "asc",
-        },
-      ],
-    });
-  } catch (err) {
-    console.error(err);
-  } finally {
-    prisma.$disconnect();
-  }
-}
-
-export async function getCompletedTodos(name: string) {
-  try {
-    return await prisma.todo.findMany({
-      select: selectFields,
-      where: {
-        done: true,
-        label: {
-          contains: name,
-        },
-      },
-      orderBy: [
-        {
-          updatedAt: "desc",
-        },
-        {
-          label: "asc",
-        },
-      ],
+      orderBy: done
+        ? [
+            {
+              updatedAt: "desc",
+            },
+            {
+              label: "asc",
+            },
+          ]
+        : [
+            {
+              label: "asc",
+            },
+          ],
     });
   } catch (err) {
     console.error(err);

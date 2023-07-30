@@ -1,5 +1,4 @@
 import Controls from "./Controls";
-import DoneList from "./DoneList";
 import TodoList from "./TodoList";
 
 export default function Main() {
@@ -7,8 +6,8 @@ export default function Main() {
     <main className="px-6 mt-6">
       <Controls />
       <div className="grid grid-cols-2 gap-16">
-        <TodoList />
-        <DoneList />
+        <TodoList isDone={false} />
+        <TodoList isDone={true} />
       </div>
     </main>
   );

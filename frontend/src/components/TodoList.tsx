@@ -1,35 +1,44 @@
 import { useEffect } from "react";
-import { loadInitialTodos } from "../store/completeTodoSlice";
+import { loadInitialTodos, loadCompleteTodos } from "../store/todoSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { SimpleTodo } from "../store/completeTodoSlice";
+import type { GetTodosResp } from "../utils/responses";
+import Todo from "./Todo";
 
-export type GetTodosResp = {
-  todos: SimpleTodo[];
-  status: "ok" | "error";
-};
-
-export default function TodoList() {
+export default function TodoList({ isDone }: { isDone: boolean }) {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector((state) => state.todoReducer.todos);
+  const todos = useAppSelector((state) => {
+    if (isDone) {
+      return state.todoReducer.completeTodos;
+    }
+    return state.todoReducer.todos;
+  });
   const search = useAppSelector((state) => state.todoReducer.search);
+  const action = isDone ? loadCompleteTodos : loadInitialTodos;
   useEffect(() => {
     const getTodos = async () => {
       try {
-        const resp = await fetch(`/api/todos`);
+        const resp = await fetch(`/api/todos?done=${isDone}&name=${search}`);
         const todos: GetTodosResp = await resp.json();
-        dispatch(loadInitialTodos(todos.todos));
+        dispatch(action(todos.todos));
       } catch (err) {
         console.error(err);
       }
     };
     getTodos();
-  }, [search, dispatch]);
+  }, [search, action, dispatch, isDone]);
+  console.log("render list");
   return (
     <div>
-      <h2 className="border-b text-3xl border-black pb-2">To Do</h2>
-      {todos.map((todo) => (
-        <div key={todo.id}>{todo.label}</div>
-      ))}
+      <h2 className="border-b text-3xl border-black pb-2">
+        {isDone ? "Done" : "To Do"}
+      </h2>
+      <ul className="px-2 py-4">
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <Todo todo={todo} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
