@@ -2,7 +2,7 @@
 
 ## Some explanations
 
-I haven't written tests for BE and FE because lack of time and very upset accident.
+I haven't written tests for BE and FE because lack of time (I've had only 48 hrs from noon Friday) and very upset accident.
 Yesterday (Jule 29th), at 6pm I almost finished it, and decied to deploy it to vercel. after few attemps and getting error that frontend/package.json cannot be found I decided to have a walk.
 Then I came back and got an idea that it would be greate to move everything into single folder. After done so I commited changes aaand... findout that there is no FE files at all. I thought, ok, lets get back in history with help of git... But for some reason git haven't looked at my FE folder. Good moment that I understood why vercel have that error and I made few code optimisations. Bad that I lost all my progress...
 So I started all over again.
