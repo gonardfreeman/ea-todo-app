@@ -14,5 +14,7 @@ As for new features: I added only insert new todo by hitting enter. As for me th
 
 ## How To:
 
+to install run npm run install from `root`, `frontend` and `backend` folders
+
 to run app: `npm run start` from root folder
 to run some tests `npm test` from frontend folder
