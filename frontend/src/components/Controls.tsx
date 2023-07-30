@@ -6,7 +6,6 @@ import { addTodo, updateSearch } from "../store/todoSlice";
 export default function Controls() {
   const dispatch = useAppDispatch();
   const [todoLabel, setTodoLabel] = useState("");
-  // const [searchValue, setSearchValue] = useState("");
 
   const handleChangeLabel = (e: ChangeEvent<HTMLInputElement>) => {
     setTodoLabel(e.currentTarget.value);
@@ -54,7 +53,6 @@ export default function Controls() {
     const {
       currentTarget: { value },
     } = e;
-    // setSearchValue(value);
     debounceInput(value);
   };
 
@@ -77,7 +75,6 @@ export default function Controls() {
       </div>
       <input
         type="text"
-        // value={searchValue}
         onChange={handleSearch}
         placeholder="Search..."
         className="border rounded-lg px-4 py-2"

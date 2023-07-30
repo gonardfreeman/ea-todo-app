@@ -34,6 +34,7 @@ export async function getTodos(name: string, done: boolean) {
               label: "asc",
             },
           ],
+      take: done ? 10 : undefined,
     });
   } catch (err) {
     console.error(err);

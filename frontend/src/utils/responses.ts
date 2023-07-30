@@ -12,3 +12,9 @@ export type SingleTodoResp = {
   status: CommonStatus;
   error?: any;
 };
+
+export type DeleteTodoResp = {
+  status: CommonStatus;
+  error?: any;
+  result: boolean;
+};

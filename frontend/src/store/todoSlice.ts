@@ -9,18 +9,23 @@ export interface TodoListState {
   todos: SimpleTodo[];
   completeTodos: SimpleTodo[];
   search: string;
+  isLoading: boolean;
 }
 
 const initialState: TodoListState = {
   todos: [],
   completeTodos: [],
   search: "",
+  isLoading: false,
 };
 
 const todoSlice = createSlice({
   initialState,
   name: "todos",
   reducers: {
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
     loadInitialTodos: (state, action: PayloadAction<SimpleTodo[]>) => {
       state.todos = action.payload;
     },
@@ -62,9 +67,10 @@ const todoSlice = createSlice({
 
 export const {
   addTodo,
-  loadInitialTodos,
-  loadCompleteTodos,
   toggleTodo,
   updateSearch,
+  setIsLoading,
+  loadInitialTodos,
+  loadCompleteTodos,
 } = todoSlice.actions;
 export default todoSlice.reducer;
