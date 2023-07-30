@@ -12,6 +12,8 @@ It can be easily done with help of websocket and prisma middleware for example.
 
 As for new features: I added only insert new todo by hitting enter. As for me this app is complete on new features (for current architecture). From possible things that can be added 2nd level tasks and user related tasks.
 
+P.S. My guess that git haven't looked at FE folder because I created CRA and then moved it around, that possible can broke something.
+
 ## How To:
 
 to install run npm run install from `root`, `frontend` and `backend` folders
