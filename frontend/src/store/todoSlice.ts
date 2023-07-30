@@ -48,6 +48,7 @@ const todoSlice = createSlice({
         // do we need to throw error?
         return;
       }
+
       if (todo.done) {
         state.todos.splice(index, 1);
         state.completeTodos = [

@@ -1,7 +1,10 @@
 import { Todo } from "@prisma/client";
 import prisma from "../prisma/prisma";
 
-export type SimpleTodo = Pick<Todo, "id" | "done" | "label" | "updatedAt">;
+export type SimpleTodo = Omit<
+  Pick<Todo, "id" | "done" | "label" | "updatedAt">,
+  "updatedAt"
+> & { updatedAt: Date | string | number };
 
 const selectFields = {
   id: true,

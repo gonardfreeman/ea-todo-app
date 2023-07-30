@@ -32,7 +32,12 @@ export default function Todo({ todo }: { todo: SimpleTodo }) {
 
   return (
     <label className="text-sm text-slate-800 flex gap-4">
-      <input type="checkbox" checked={todo.done} onChange={handleChange} />
+      <input
+        type="checkbox"
+        checked={todo.done}
+        name={`${todo.id}`}
+        onChange={handleChange}
+      />
       <span>{todo.label}</span>
     </label>
   );

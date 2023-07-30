@@ -8,25 +8,28 @@ export default function TodoList({ isDone }: { isDone: boolean }) {
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => {
     if (isDone) {
-      return state.todoReducer.completeTodos;
+      return state.todo.completeTodos;
     }
-    return state.todoReducer.todos;
+    return state.todo.todos;
   });
-  const search = useAppSelector((state) => state.todoReducer.search);
+  const search = useAppSelector((state) => state.todo.search);
   const action = isDone ? loadCompleteTodos : loadInitialTodos;
   useEffect(() => {
     const getTodos = async () => {
       try {
         const resp = await fetch(`/api/todos?done=${isDone}&name=${search}`);
         const todos: GetTodosResp = await resp.json();
-        dispatch(action(todos.todos));
+        dispatch(
+          action(
+            todos.todos.map((t) => ({ ...t, updatedAt: new Date(t.updatedAt) }))
+          )
+        );
       } catch (err) {
         console.error(err);
       }
     };
     getTodos();
   }, [search, action, dispatch, isDone]);
-  console.log("render list");
   return (
     <div>
       <h2 className="border-b text-3xl border-black pb-2">
