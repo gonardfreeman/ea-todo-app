@@ -9,9 +9,13 @@ So I started all over again.
 
 I wanted to make it responsive to changes on backend.
 It can be easily done with help of websocket and prisma middleware/query extension for example.
-As I can see it and the easiest way.
-When user starts the session we open WebSocket and server sends key for us. We store given keys somewhere on server (redis or DB).
-On each DB update(for example move item into DONE) user sends key that he received. And backend sends message to every existing key that was given and active (basically to each websocket connection) except that sent that request that server is processing.
+As I can see it and the easiest way:
+
+- When user starts the session we open WebSocket and server sends key for us.
+- We store given keys somewhere on server (redis or DB).
+- On each DB update(for example move item into DONE) user sends key that he received
+- Backend sends message to every existing key that was given and active (basically to each websocket connection) except that sent that request that server is processing.
+
 
 OR
 
